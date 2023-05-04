@@ -7,16 +7,7 @@ import (
 )
 
 type Conn struct {
-	conn interface {
-		Read(b []byte) (n int, err error)
-		Write(b []byte) (n int, err error)
-		Close() error
-		LocalAddr() net.Addr
-		RemoteAddr() net.Addr
-		SetReadDeadline(time.Time) error
-		SetWriteDeadline(time.Time) error
-		SetDeadline(time.Time) error
-	}
+	Conn       net.Conn
 	dataReader *internalDataReader
 	dataWriter *internalDataWriter
 }
@@ -50,7 +41,7 @@ func DialTo(addr string) (*Conn, error) {
 	dataWriter := newDataWriter(conn)
 
 	clientConn := Conn{
-		conn:       conn,
+		Conn:       conn,
 		dataReader: dataReader,
 		dataWriter: dataWriter,
 	}
@@ -80,7 +71,7 @@ func DialToTimeout(addr string, timeout time.Duration) (*Conn, error) {
 	dataWriter := newDataWriter(conn)
 
 	clientConn := Conn{
-		conn:       conn,
+		Conn:       conn,
 		dataReader: dataReader,
 		dataWriter: dataWriter,
 	}
@@ -113,7 +104,7 @@ func DialToTLS(addr string, tlsConfig *tls.Config) (*Conn, error) {
 	dataWriter := newDataWriter(conn)
 
 	clientConn := Conn{
-		conn:       conn,
+		Conn:       conn,
 		dataReader: dataReader,
 		dataWriter: dataWriter,
 	}
@@ -141,7 +132,7 @@ func DialToTLSTimeout(addr string, timeout time.Duration, tlsConfig *tls.Config)
 	dataWriter := newDataWriter(conn)
 
 	clientConn := Conn{
-		conn:       conn,
+		Conn:       conn,
 		dataReader: dataReader,
 		dataWriter: dataWriter,
 	}
@@ -160,7 +151,7 @@ func DialToTLSTimeout(addr string, timeout time.Duration, tlsConfig *tls.Config)
 //	}
 //	defer telnetsClient.Close()
 func (clientConn *Conn) Close() error {
-	return clientConn.conn.Close()
+	return clientConn.Conn.Close()
 }
 
 // Read receives `n` bytes sent from the server to the client,
@@ -191,10 +182,10 @@ func (clientConn *Conn) Write(p []byte) (n int, err error) {
 
 // LocalAddr returns the local network address.
 func (clientConn *Conn) LocalAddr() net.Addr {
-	return clientConn.conn.LocalAddr()
+	return clientConn.Conn.LocalAddr()
 }
 
 // RemoteAddr returns the remote network address.
 func (clientConn *Conn) RemoteAddr() net.Addr {
-	return clientConn.conn.RemoteAddr()
+	return clientConn.Conn.RemoteAddr()
 }
