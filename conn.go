@@ -15,6 +15,7 @@ type Conn struct {
 		RemoteAddr() net.Addr
 		SetReadDeadline(time.Time) error
 		SetWriteDeadline(time.Time) error
+		SetDeadline(time.Time) error
 	}
 	dataReader *internalDataReader
 	dataWriter *internalDataWriter
