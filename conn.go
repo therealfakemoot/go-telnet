@@ -13,6 +13,8 @@ type Conn struct {
 		Close() error
 		LocalAddr() net.Addr
 		RemoteAddr() net.Addr
+		SetReadDeadline(time.Time) error
+		SetWriteDeadline(time.Time) error
 	}
 	dataReader *internalDataReader
 	dataWriter *internalDataWriter
@@ -34,7 +36,7 @@ func DialTo(addr string) (*Conn, error) {
 
 	const network = "tcp"
 
-	if "" == addr {
+	if addr == "" {
 		addr = "127.0.0.1:telnet"
 	}
 
@@ -64,7 +66,7 @@ func DialToTimeout(addr string, timeout time.Duration) (*Conn, error) {
 
 	const network = "tcp"
 
-	if "" == addr {
+	if addr == "" {
 		addr = "127.0.0.1:telnet"
 	}
 
@@ -97,7 +99,7 @@ func DialToTLS(addr string, tlsConfig *tls.Config) (*Conn, error) {
 
 	const network = "tcp"
 
-	if "" == addr {
+	if addr == "" {
 		addr = "127.0.0.1:telnets"
 	}
 
@@ -125,7 +127,7 @@ func DialToTLSTimeout(addr string, timeout time.Duration, tlsConfig *tls.Config)
 
 	const network = "tcp"
 
-	if "" == addr {
+	if addr == "" {
 		addr = "127.0.0.1:telnets"
 	}
 
@@ -134,7 +136,6 @@ func DialToTLSTimeout(addr string, timeout time.Duration, tlsConfig *tls.Config)
 	if nil != err {
 		return nil, err
 	}
-
 	dataReader := newDataReader(conn)
 	dataWriter := newDataWriter(conn)
 
