@@ -37,7 +37,7 @@ DialToAndCall creates a (un-secure) TELNET client, which connects to a given add
 	package main
 	
 	import (
-		"github.com/reiver/go-telnet"
+		"github.com/therealfakemot/go-telnet"
 	)
 	
 	func main() {
@@ -55,7 +55,7 @@ DialToAndCallTLS creates a (secure) TELNETS client, which connects to a given ad
 	package main
 	
 	import (
-		"github.com/reiver/go-telnet"
+		"github.com/therealfakemot/go-telnet"
 
 		"crypto/tls"
 	)
@@ -95,7 +95,7 @@ If you typed:
 
 (Exactly the same data you sent it.)
 
-A more useful TELNET server can be made using the "github.com/reiver/go-telnet/telsh" sub-package.
+A more useful TELNET server can be made using the "github.com/therealfakemot/go-telnet/telsh" sub-package.
 
 The `telsh` sub-package provides "middleware" that enables you to create a "shell" interface (also
 called a "command line interface" or "CLI") which most people would expect when using TELNET OR TELNETS.
@@ -108,8 +108,8 @@ For example:
 	
 	import (
 		"github.com/reiver/go-oi"
-		"github.com/reiver/go-telnet"
-		"github.com/reiver/go-telnet/telsh"
+		"github.com/therealfakemot/go-telnet"
+		"github.com/therealfakemot/go-telnet/telsh"
 		
 		"time"
 	)
@@ -256,7 +256,7 @@ You can make a simple (un-secure) TELNET client with code like the following:
 	
 	
 	import (
-		"github.com/reiver/go-telnet"
+		"github.com/therealfakemot/go-telnet"
 	)
 	
 	
@@ -276,7 +276,7 @@ You can make a simple (secure) TELNETS client with code like the following:
 	
 	
 	import (
-		"github.com/reiver/go-telnet"
+		"github.com/therealfakemot/go-telnet"
 	)
 	
 	

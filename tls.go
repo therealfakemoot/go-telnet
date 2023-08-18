@@ -18,7 +18,7 @@ import (
 //	package main
 //
 //	import (
-//		"github.com/reiver/go-telnet"
+//		"github.com/therealfakemot/go-telnet"
 //	)
 //
 //	func main() {
