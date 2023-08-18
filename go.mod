@@ -1,4 +1,4 @@
-module github.com/therealfakemot/go-telnet
+module github.com/therealfakemoot/go-telnet
 
 go 1.19
 
